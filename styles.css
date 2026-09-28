@@ -1,0 +1,63 @@
+:root {
+--black: #000000;
+}
+body{
+    background-color: #f0f0f0;
+}
+
+h1{
+    font-size: 3em;
+    font-style: bold;
+    color: var(--black);
+}
+
+h2{
+    font-size: 2.25em;
+    color: var(--black);
+    margin: 0px;
+}
+
+h3{
+    font-size: 1.5em;
+    color: var(--black);
+    margin: 0px;
+}
+
+p{
+    font-size: 1em;
+    color: var(--black);
+}
+
+.horizontal-box{
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-box{
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.title-section img{
+    vertical-align: center;
+    margin-right: 1rem;
+}
+
+menu{
+    display: flex;
+    justify-content: flex-end;
+}
+menu a{
+    text-decoration: none;
+    color: var(--black);
+    margin-left: 20px;
+    align-items: flex-start;
+    margin-top: 0px;
+}
