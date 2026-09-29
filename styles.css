@@ -73,7 +73,7 @@ menu a{
     width: 20rem;
     height: 13rem;
 
-    background-color: #8d8d8d;
+    background-color: #adadad;
     border-radius: 0.5rem;
 
     display: flex;
@@ -97,6 +97,9 @@ menu a{
     cursor: pointer;
     opacity: 0.95;
     text-decoration: none;
+
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .project-card.active {
@@ -107,4 +110,41 @@ menu a{
 .project-details{
     justify-content: center;
     text-align: center;
+}
+
+.project-card img{
+    height: 70%;
+    width: 100%;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+
+    .project-wheel {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        overflow: hidden;
+    }
+
+    .project-card {
+        position: absolute;
+
+        left: 50%;
+        top: 50%;
+
+        width: min(80vw, 20rem);
+
+        margin: 0;
+
+        box-sizing: border-box;
+
+        transform-origin: center center;
+    }
+
 }

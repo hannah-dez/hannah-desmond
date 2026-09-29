@@ -4,50 +4,50 @@ const projects = [
     {
         title: "Aftermath",
         description: "A description of my first UX project.",
-        image: "/content/standinimage.png",
-        link: "/aftermath.html"
+        image: "content/defaultimg.jpg",
+        link: "aftermath.html"
     },
 
     {
         title: "Greenlight",
         description: "A description of my first UX project.",
-        image: "/content/standinimage.png",
-        link: "/greenlight.html"
+        image: "content/defaultimg.jpg",
+        link: "greenlight.html"
     },
 
     {
         title: "Kims Dragon",
         description: "A description of my first UX project.",
-        image: "/content/standinimage.png",
-        link: "/kimsdragon.html"
+        image: "content/defaultimg.jpg",
+        link: "kimsdragon.html"
     },
 
     {
         title: "CMS Website",
         description: "A description of my second UX project.",
-        image: "/content/standinimage.png",
-        link: "/cmswebsite.html"
+        image: "content/defaultimg.jpg",
+        link: "cmswebsite.html"
     },
 
     {
         title: "PHP Recipe Site",
         description: "A description of my third UX project.",
-        image: "/content/standinimage.png",
-        link: "/phprecipesite.html"
+        image: "content/defaultimg.jpg",
+        link: "phprecipesite.html"
     },
 
     {
         title: "Microinteraction",
         description: "A description of my fourth UX project.",
-        image: "/content/standinimage.png",
-        link: "/microinteraction.html"
+        image: "content/defaultimg.jpg",
+        link: "microinteraction.html"
     },
 
     {
         title: "Birdthday Watching",
         description: "A description of my fourth UX project.",
-        image: "/content/standinimage.png",
-        link: "/birdthdaywatching.html"
+        image: "content/defaultimg.jpg",
+        link: "birdthdaywatching.html"
     }
 ];
 
@@ -129,12 +129,14 @@ projects.forEach((project, index) => {
 });
 
 function positionCards(position) {
+
     const angleBetweenCards =
         360 / cards.length;
 
     const radius = 550;
 
     cards.forEach((card, index) => {
+
         const angle =
             (index - position) *
             angleBetweenCards -
@@ -155,25 +157,74 @@ function positionCards(position) {
             `translate(${x}px, ${y}px)`;
 
         card.classList.toggle(
-            "active", index === activeIndex
+            "active",
+            index === activeIndex
         );
+
     });
 }
 
+function positionCardsMobile() {
+
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 30;
+
+    cards.forEach((card, index) => {
+
+        let difference = index - activeIndex;
+
+        // Wrap around the carousel
+        if (difference > cards.length / 2) {
+            difference -= cards.length;
+        }
+
+        if (difference < -cards.length / 2) {
+            difference += cards.length;
+        }
+
+        const x =
+            difference * (cardWidth + gap);
+
+        card.style.transform =
+            `translateX(calc(-50% + ${x}px))`;
+
+        card.classList.toggle(
+            "active",
+            index === activeIndex
+        );
+
+    });
+}
+
+function positionResponsive() {
+
+    if (window.innerWidth <= 768) {
+
+        positionCardsMobile();
+
+    } else {
+
+        positionCards(wheelPosition);
+
+    }
+
+}
 positionCards(wheelPosition);
 
 function animateWheel() {
-    if (!isPaused) {
 
-        wheelPosition += 0.0001;
+    if (
+        !isPaused &&
+        window.innerWidth > 768
+    ) {
 
-        if (wheelPosition >= cards.length) {
-            wheelPosition -= cards.length;}
+        wheelPosition += 0.0008;
 
         updateActiveIndex();
 
         positionCards(wheelPosition);
     }
+
     requestAnimationFrame(animateWheel);
 }
 
@@ -195,7 +246,7 @@ function moveWheelTo(targetPosition) {
     const startTime =
         performance.now();
 
-    function animate(currentTime) {
+function animate(currentTime) {
 
         const elapsed =
             currentTime - startTime;
@@ -247,6 +298,21 @@ function updateActiveIndex() {
 }
 
 function moveNext() {
+
+    if (window.innerWidth <= 768) {
+
+        activeIndex++;
+
+        if (activeIndex >= cards.length) {
+            activeIndex = 0;
+        }
+
+        positionCardsMobile();
+
+        return;
+    }
+
+
     const currentPosition =
         Math.round(wheelPosition);
 
@@ -257,6 +323,21 @@ function moveNext() {
 }
 
 function movePrevious() {
+
+    if (window.innerWidth <= 768) {
+
+        activeIndex--;
+
+        if (activeIndex < 0) {
+            activeIndex = cards.length - 1;
+        }
+
+        positionCardsMobile();
+
+        return;
+    }
+
+
     const currentPosition =
         Math.round(wheelPosition);
 
@@ -290,17 +371,39 @@ function scheduleResume() {
 
 }
 
-window.addEventListener(
-    "wheel", (event) => {
-        pauseWheel();
+window.addEventListener("wheel", (event) => {
 
-        if (isAnimating) 
-            {return;}
+    pauseWheel();
 
-        if (event.deltaY > 0) 
-            {moveNext();}
+    if (isAnimating) {
+        return;
+    }
 
-        else if (event.deltaY < 0) 
-            { movePrevious(); }
-    });
+    if (window.innerWidth <= 768) {
+
+        if (event.deltaY > 0) {
+            moveNext();
+        } else if (event.deltaY < 0) {
+            movePrevious();
+        }
+
+        scheduleResume();
+
+        return;
+    }
+
+
+    // Desktop behavior
+    if (event.deltaY > 0) {
+        moveNext();
+    } else if (event.deltaY < 0) {
+        movePrevious();
+    }
+
+});
+});
+window.addEventListener("resize", () => {
+
+    positionResponsive();
+
 });
