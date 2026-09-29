@@ -4,49 +4,49 @@ const projects = [
     {
         title: "Aftermath",
         description: "A description of my first UX project.",
-        image: "project-one.jpg",
+        image: "/content/standinimage.png",
         link: "/aftermath.html"
     },
 
     {
         title: "Greenlight",
         description: "A description of my first UX project.",
-        image: "project-two.jpg",
+        image: "/content/standinimage.png",
         link: "/greenlight.html"
     },
 
     {
         title: "Kims Dragon",
         description: "A description of my first UX project.",
-        image: "project-three.jpg",
+        image: "/content/standinimage.png",
         link: "/kimsdragon.html"
     },
 
     {
         title: "CMS Website",
         description: "A description of my second UX project.",
-        image: "project-four.jpg",
+        image: "/content/standinimage.png",
         link: "/cmswebsite.html"
     },
 
     {
         title: "PHP Recipe Site",
         description: "A description of my third UX project.",
-        image: "project-five.jpg",
+        image: "/content/standinimage.png",
         link: "/phprecipesite.html"
     },
 
     {
         title: "Microinteraction",
         description: "A description of my fourth UX project.",
-        image: "project-six.jpg",
+        image: "/content/standinimage.png",
         link: "/microinteraction.html"
     },
 
     {
         title: "Birdthday Watching",
         description: "A description of my fourth UX project.",
-        image: "project-seven.jpg",
+        image: "/content/standinimage.png",
         link: "/birdthdaywatching.html"
     }
 ];
@@ -70,6 +70,9 @@ projects.forEach((project, index) => {
     card.classList.add("project-card");
 
     card.href = project.link;
+
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
 
     card.innerHTML = `
         <img src="${project.image}" alt="${project.title}">
@@ -161,13 +164,16 @@ positionCards(wheelPosition);
 
 function animateWheel() {
     if (!isPaused) {
-        wheelPosition += 0.0008;
+
+        wheelPosition += 0.0001;
+
+        if (wheelPosition >= cards.length) {
+            wheelPosition -= cards.length;}
 
         updateActiveIndex();
 
         positionCards(wheelPosition);
     }
-
     requestAnimationFrame(animateWheel);
 }
 
@@ -223,6 +229,8 @@ function moveWheelTo(targetPosition) {
             positionCards(wheelPosition);
 
             isAnimating = false;
+
+            scheduleResume();
         }}
     requestAnimationFrame(
         animate
@@ -267,15 +275,20 @@ function pauseWheel() {
 }
 
 function scheduleResume() {
-    clearTimeout(
-        resumeTimer
-    );
 
-    resumeTimer =
-        setTimeout(() => {
-            isPaused = false;}, 
-            1000);
-    }
+    clearTimeout(resumeTimer);
+
+    resumeTimer = setTimeout(() => {
+
+        if (!isHoveringCard) {
+
+            isPaused = false;
+
+        }
+
+    }, 5000);
+
+}
 
 window.addEventListener(
     "wheel", (event) => {
