@@ -66,12 +66,38 @@ menu a{
     align-items: flex-start;
     margin-top: 0px;
 }
+/*Ux Projects Styles*/
 
 /*Ux Projects Styles*/
+
+/* Card size comes from one variable, so card height and wheel size can scale with it.
+   Defaults match your original 20rem x 13rem cards. */
+.project-wheel {
+    --card-w: 20rem;
+
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+
+    
+    /* Cards fade out and back in when you switch folder tabs.
+       Keep the 0.2s in sync with SWITCH_FADE in script.js. */
+    transition: opacity 0.2s ease;
+}
+
+.project-wheel.is-switching {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .project-card {
     position: absolute;
-    width: 20rem;
-    height: 13rem;
+    left: 40%;
+    top: 122%;
+
+    width: var(--card-w);
+    height: calc(var(--card-w) * 0.65);
 
     background-color: #adadad;
     border-radius: 0.5rem;
@@ -79,27 +105,22 @@ menu a{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
 
-.project-card h3{
-    margin-left: 1.5rem;
-}
-.project-wheel {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    overflow: hidden;
-}
-
-.project-card {
-    left: 40%;
-    top: 122%;
     cursor: pointer;
     opacity: 0.95;
     text-decoration: none;
 
     overflow: hidden;
     box-sizing: border-box;
+
+    /* Stops text/image selection while swiping */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.project-card h3 {
+    margin-left: 1.5rem;
 }
 
 .project-card.active {
@@ -107,12 +128,7 @@ menu a{
     z-index: 10;
 }
 
-.project-details{
-    justify-content: center;
-    text-align: center;
-}
-
-.project-card img{
+.project-card img {
     height: 70%;
     width: 100%;
     border-radius: 0.5rem 0.5rem 0rem 0rem;
@@ -121,30 +137,262 @@ menu a{
     object-position: center;
     display: block;
     flex-shrink: 0;
+    -webkit-user-drag: none;
 }
 
-@media (max-width: 768px) {
+.project-details {
+    justify-content: center;
+    text-align: center;
+}
 
+/* main centers its children (align-items: center), which would shrink this row
+   to the width of its content, so it needs an explicit full width */
+.projects-layout {
+    width: 100%;
+}
+/* ---------- Folder: the details panel with Experience / Projects tabs ----------
+   Two "sheets" are stacked. The active one is in front and its tab blends into
+   the folder. The other sits behind with just its tab showing; hover that tab
+   and the sheet slides out a little. Click it and the sheets swap. */
+.folder {
+    --tab-h: 2.75rem;
+    --folder-radius: 0.75rem;
+    --folder-front: #d9d9d9;
+    --folder-back: #c8c7c7;
+ 
+    /* How far the back sheet slides out on hover */
+    --peek-x: 0.75rem;
+    --peek-y: -0.9rem;
+    --peek-rotate: 2.5deg;
+ 
+    position: relative;
+}
+ 
+.folder-sheet {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+ 
+    /* Experience slides left, Projects slides right */
+    --dir: -1;
+ 
+    transform-origin: bottom center;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+ 
+    /* Only the tab buttons take the mouse, so the sheets never block anything */
+    pointer-events: none;
+}
+ 
+.folder-sheet[data-tab="projects"] {
+    --dir: 1;
+}
+ 
+.folder-sheet.is-active {
+    z-index: 2;
+}
+ 
+/* The sheet's body (everything under the tab) */
+.folder-sheet::after {
+    content: "";
+    position: absolute;
+    inset: var(--tab-h) 0 0 0;
+    background-color: var(--folder-back);
+    /* The corner under the tab stays square so tab and body join up */
+    border-radius: 0 var(--folder-radius) var(--folder-radius) var(--folder-radius);
+    transition: background-color 0.35s ease;
+}
+ 
+.folder-sheet[data-tab="projects"]::after {
+    border-radius: var(--folder-radius) 0 var(--folder-radius) var(--folder-radius);
+}
+ 
+.folder-sheet.is-active::after {
+    background-color: var(--folder-front);
+}
+ 
+.folder-tab {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    /* +1px overlaps the body so there's no hairline between tab and body */
+    height: calc(var(--tab-h) + 1px);
+ 
+    border: 0;
+    border-radius: var(--folder-radius) var(--folder-radius) 0 0;
+    background-color: var(--folder-back);
+    color: var(--black, #000000);
+    font: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+    pointer-events: auto;
+ 
+    transition: background-color 0.35s ease;
+}
+ 
+.folder-sheet[data-tab="experience"] .folder-tab {
+    left: 0;
+}
+ 
+.folder-sheet[data-tab="projects"] .folder-tab {
+    right: 0;
+}
+ 
+.folder-sheet.is-active .folder-tab {
+    background-color: var(--folder-front);
+    cursor: default;
+}
+ 
+/* The inactive tab moves when hovered, so give it a larger invisible hit area.
+   Otherwise the tab slides out from under the mouse and flickers. */
+.folder-sheet:not(.is-active) .folder-tab::after {
+    content: "";
+    position: absolute;
+    inset: -1.25rem;
+}
+ 
+/* Hover (or keyboard focus) on the tab behind: the sheet slides out */
+.folder-sheet:not(.is-active):has(.folder-tab:is(:hover, :focus-visible)) {
+    transform:
+        translate(calc(var(--dir) * var(--peek-x)), var(--peek-y))
+        rotate(calc(var(--dir) * var(--peek-rotate)));
+}
+ 
+.folder-tab:focus-visible {
+    outline: 2px solid var(--black, #000000);
+    outline-offset: -4px;
+}
+ 
+/* The picture, title and description sit on top of the front sheet.
+   The top margin keeps the content clear of the tabs. */
+.folder-content {
+    position: relative;
+    z-index: 3;
+    margin-top: var(--tab-h);
+    padding: 1.5rem;
+ 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+ 
+    text-align: left;
+}
+ 
+.folder-content img {
+    width: 100%;
+    max-height: 45vh;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+ 
+.folder-content h3,
+.folder-content p {
+    margin: 0;
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+    .folder-sheet,
+    .folder-sheet::after,
+    .folder-tab,
     .project-wheel {
-        position: relative;
-        width: 100%;
-        height: 360px;
-        overflow: hidden;
+        transition: none;
+    }
+}
+ 
+/* ---------- Desktop, right-focus layout: <div class="project-wheel" data-focus="right"> ---------- */
+@media (min-width: 769px) {
+
+    /* Page becomes a column that is at least one screen tall:
+       header and title take their natural height, the wheel gets everything left.
+       (Only applies to pages that contain a right-focus wheel.) */
+    body:has(.project-wheel[data-focus="right"]) {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
     }
 
-    .project-card {
-        position: absolute;
+    body:has(.project-wheel[data-focus="right"]) main {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
 
+    /* Wheel and details panel sit side by side in one row,
+       and that row takes all the height left under the title */
+    .projects-layout {
+        --details-w: clamp(18rem, 30vw, 28rem);
+
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    .project-wheel[data-focus="right"] {
+        /* Cards scale with the window's width and height */
+        --card-w: clamp(15rem, min(24vw, 36vh), 24rem);
+
+        /* The wheel keeps the left edge and takes all the space the details
+           panel doesn't, so its size no longer depends on the panel */
+        flex: 1;
+        min-width: 0;
+        height: auto;
+        min-height: 30rem;
+    }
+
+        .projects-layout .project-details {
+        /* Fixed width, pinned to the right edge. The top margin leaves room
+           for the back sheet to slide up on hover. */
+        flex: 0 0 var(--details-w);
+        min-width: 0;
+        margin: 1.25rem clamp(1.5rem, 4vw, 4rem) 0 0;
+    }
+ 
+    .project-wheel[data-focus="right"] .project-card {
+        /* The JS places each card's top-left corner, starting from here */
+        left: 0;
+        top: 0;
+    }
+}
+ 
+/* ---------- Mobile: horizontal 3D circle ---------- */
+@media (max-width: 768px) {
+ 
+    /* Wheel on top, folder underneath. The card already shows the picture
+       on mobile, so the folder skips it (delete this rule to show it). */
+    .projects-layout .project-details {
+        margin: 1.25rem 1.5rem 2rem;
+    }
+ 
+    .folder-content img {
+        display: none;
+    }
+ 
+    .project-wheel {
+        /* Cards, and the wheel around them, scale with the screen width */
+        --card-w: min(80vw, 24rem);
+        height: calc(var(--card-w) * 1.1);
+ 
+        /* Let the page scroll up/down, but give horizontal swipes to the JS.
+           (The JS sets the perspective, so depth also scales with card size.) */
+        touch-action: pan-y;
+    }
+ 
+    .project-card {
+        /* Centered in the wheel; the JS adds the 3D movement on top.
+           No CSS transition here, the JS animates every frame. */
         left: 50%;
         top: 50%;
-
-        width: min(80vw, 20rem);
-
+ 
         margin: 0;
-
-        box-sizing: border-box;
-
+ 
         transform-origin: center center;
+        will-change: transform, opacity;
     }
-
+ 
 }

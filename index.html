@@ -16,10 +16,33 @@
             </div>
         </div>
         <menu class="horizontal-box">
-            <a href="/uxprojects.html">Projects</a>
-            <a href="/resume.html">Resume</a>
-            <a href="/contact.html">Contact</a>
+            <a href="./uxprojects.html">Projects</a>
+            <a href="./resume.html">Resume</a>
+            <a href="./contact.html">Contact</a>
         </menu>
     </header>
+    <main>
+       
+        <!-- One row: wheel on the left, folder on the right -->
+        <div class="projects-layout">
+            <div class="project-wheel" data-focus="right"></div>
+ 
+            <!-- The folder. Keep the img, h3 and p: the script fills them in. -->
+            <div class="project-details folder" data-active="projects">
+                <div class="folder-sheet" data-tab="experience">
+                    <button class="folder-tab" type="button" data-tab="experience" aria-pressed="false">Experience</button>
+                </div>
+                <div class="folder-sheet is-active" data-tab="projects">
+                    <button class="folder-tab" type="button" data-tab="projects" aria-pressed="true">Projects</button>
+                </div>
+ 
+                <div class="folder-content">
+                    <img src="content/defaultimg.jpg" alt="">
+                    <h3>Project Name</h3>
+                    <p>Project description</p>
+                </div>
+            </div>
+    </main>
 </body>
+<script src="script.js"></script>
 </html>

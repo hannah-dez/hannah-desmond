@@ -1,0 +1,88 @@
+:root{
+    --serif-text: 'Literata', "./content/fonts/Literata-Regular.ttf", serif;
+    --sans-serif-text: 'Fustat', "./content/fonts/Fustat-Regular.ttf", sans-serif;
+}
+
+body{
+    background-color: #f0f0f0;
+}
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+h1{
+    font:100% var(--serif-text);
+    font-size: 3em;
+}
+h2{
+    font:100% var(--sans-serif-text);
+    font-size: 1.75em;
+    margin: 0px;
+}
+h3{
+    font:100% var(--sans-serif-text);
+    font-size: 0.75em;
+    margin: 0px;
+}
+p{
+    font:100% var(--sans-serif-text);
+    font-size: 1em;
+}
+.identity-card.main{
+    width: 42vw;
+    height: 24rem;
+}
+
+
+.identity-card{
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+}
+
+.identity-card.short{
+    width: 20vw;
+    height: 10rem;
+}
+
+.identity-card.long{
+    width: 45vw;
+    height: 10rem;
+}
+
+.card-holder{
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.colors{
+    display: flex;
+    flex-direction: row;
+}
+
+.color-swatch{
+    width: 25%;
+    height: 100%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.blue{
+    background-color: #F9FDFF;
+}
+
+.green{
+    background-color: #EBF0D2;
+}
+
+.tan{
+    background-color: #F6F1E7;
+}
