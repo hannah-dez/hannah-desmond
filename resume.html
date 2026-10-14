@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="resume.css">
     <title>Resume</title>
 </head>
 <body>
@@ -21,5 +22,60 @@
             <a href="/contact.html">Contact</a>
         </menu>
     </header>
+    <main class="resume-page">
+        <section class="resume-hero">
+            <div class="resume-title">
+                <h1>Resume</h1>
+                <a href="resume.pdf" download>Download</a>
+            </div>
+            <div class="about">
+                <img class="about-bg" src="content/about-blob.png" alt="" aria-hidden="true">
+                <div class="about-photo">
+                    <img src="content/about-photo.jpg" alt="Hannah on a beach at sunset">
+                </div>
+                <div class="about-blob">
+                    <h2 class="pill">About Me</h2>
+                    <p>I'm a UX designer, collaborative team player, and persistent problem-solver who adapts quickly when challenges or priorities change. I approach my work with curiosity, optimism, and a sense of humor, always looking for opportunities to learn, contribute, and help the people around me.</p>
+                    <p>My goal is to work closely with developers on evolving products, turning complex problems into thoughtful, practical experiences. I'm especially motivated by teams with clear goals, open communication, and a shared desire to create work that makes a meaningful difference for the people who use it.</p>
+                </div>
+            </div>
+            <div class="skills">
+                <h2 class="pill">Skills</h2>
+                <ul class="skill-grid">
+                    <li></li><li></li><li></li><li></li><li></li><li></li>
+                    <li></li><li></li><li></li><li></li><li></li><li></li>
+                    <li></li><li></li><li></li><li></li><li></li><li></li>
+                </ul>
+            </div>
+        </section>
+        <section class="work">
+            <div class="work-bg" aria-hidden="true"></div>
+            <h2 class="pill work-title">Work Experiences</h2>
+            <div class="project-wheel" data-layout="horizontal">
+                <!-- Placeholder cards for the layout only: the script will build the real ones -->
+                <a class="project-card" href="#"><img src="content/defaultimg.jpg" alt=""><h3>SEPTA</h3></a>
+                <a class="project-card active" href="#"><img src="content/defaultimg.jpg" alt=""><h3>OPEX</h3></a>
+                <a class="project-card" href="#"><img src="content/defaultimg.jpg" alt=""><h3>TENEO</h3></a>
+            </div>
+            <article class="work-detail">
+                <img class="work-detail-logo" src="content/defaultimg.jpg" alt="">
+                <div class="work-detail-text">
+                    <h3>OPEX | Cinaminson, New Jersey</h3>
+                    <p class="work-detail-role">UX Design Intern | Mar 2026-Sep 2026</p>
+                    <ul>
+                        <li>Served as the sole UX designer embedded within the Infinity HMI development team, leading end-to-end research, interaction design, prototyping, and validation.</li>
+                        <li>Conducted and synthesized 25+ user interviews, usability tests, and validation sessions, translating findings into design improvements, functional requirements, and developer documentation.</li>
+                        <li>Bridged design and development by learning Unreal Engine 5, UMG, Blueprint, and foundational C++ to build functional prototypes and reusable widgets for testing before Slate implementation.</li>
+                        <li>Designed and tested complex tools, including the WAC Configurator and Instant Replay, while establishing an accessible color system, centralized Figma library, and reusable components across the HMI.</li>
+                    </ul>
+                </div>
+                <ul class="work-detail-tools">
+                    <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+                </ul>
+            </article>
+        </section>
+ 
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>

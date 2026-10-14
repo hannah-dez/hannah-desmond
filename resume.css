@@ -1,0 +1,240 @@
+body:has(.resume-page) { margin: 0; }
+
+.resume-page {
+    align-items: stretch;
+    width: 100%;
+    overflow-x: clip;
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --green: #e9eed2;
+    --pill-font: Georgia, "Times New Roman", serif;
+    --work-overlap: 140px;
+}
+
+.pill {
+    display: inline-block;
+    margin: 0;
+    padding: 0.15em 1em;
+    background: #fff;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+}
+
+/* ================= SECTION 1: hero ================= */
+.resume-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-areas:
+        "title title"
+        "about skills";
+    column-gap: clamp(1.5rem, 5vw, 5rem);
+    align-items: start;
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.resume-title {
+    grid-area: title;
+    text-align: center;
+    padding: clamp(1rem, 3vw, 2.5rem) 0;
+}
+.resume-title h1 { margin: 0; font-family: var(--pill-font); font-weight: 400; }
+.resume-title a { color: var(--black); text-decoration: none; }
+
+.about {
+    grid-area: about;
+    position: relative;
+    isolation: isolate;
+}
+
+.about-bg {
+    position: absolute;
+    z-index: 1;
+    scale: 0.86;
+    transform: scaleY(0.8);
+    top: 33%;
+    left: -8%;
+    width: 110%;
+    height: 85%;
+    object-fit: fill;
+    pointer-events: none;
+}
+
+.about-photo {
+    position: relative;
+    z-index: -1;
+    width: 90%;
+    aspect-ratio: 1.5 / 1;
+    overflow: hidden;
+    background: #cfcfcf;
+    border-radius: 50% 50% 0 0 / 75% 75% 0 0;
+}
+
+.about-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+.about-blob {
+    position: relative;
+    z-index: 2;
+    margin-top: -15%;
+    padding: clamp(3rem, 6vw, 4.5rem)
+             clamp(1.5rem, 5vw, 4rem)
+             clamp(2rem, 5vw, 4rem)
+             var(--gutter);
+    background: transparent;
+    border-radius: 0;
+}
+
+.about-blob .pill {
+    position: absolute;
+    top: 0;
+    left: var(--gutter);
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.about-blob p {
+    margin: 0 0 1em;
+    font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+}
+
+.about-blob p:last-child {
+    margin-bottom: 0;
+}
+
+.skills {
+    grid-area: skills;
+    padding: 0.2rem var(--gutter) 0 0;
+    text-align: center;
+}
+.skill-grid {
+    list-style: none;
+    margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(3rem, 6vw, 4.5rem), 1fr));
+    gap: clamp(0.75rem, 1.6vw, 1.5rem);
+}
+.skill-grid li {
+    aspect-ratio: 1;
+    background: #d9d9d9;
+}
+
+/* ================= SECTION 2: work ================= */
+
+.work {
+    position: relative;
+    isolation: isolate;
+    margin-top: calc(var(--work-overlap) * -1);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+
+    --notch-w: clamp(9rem, 26vw, 24rem);
+    --notch-h: clamp(2.5rem, 6vw, 5.5rem);
+    --card-w: clamp(11rem, 24vw, 17rem);
+}
+
+.work-bg {
+    --bg-start: 0px;
+
+    position: absolute;
+    inset: var(--bg-start) 0 0 0;
+    z-index: -1;
+
+    background-image: url("content/work-bg.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.work-title {
+    display: block;
+    width: max-content;
+    max-width: calc(100% - 2rem);
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.work .project-wheel {
+    position: relative;
+    width: 100%;
+    height: calc(var(--card-w) * 1.1);
+    margin-top: clamp(1.5rem, 4vw, 3rem);
+    overflow: hidden;
+}
+.work .project-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--card-w);
+    height: calc(var(--card-w) * 0.7);
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--black);
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.3);
+    transform: translate(-50%, -50%);
+}
+.work .project-card img { height: 70%; object-fit: cover; width: 100%; background: #888; }
+.work .project-card h3 { font-size: 1.25rem; padding: 0.4rem 1rem; }
+.work .project-card:nth-child(1) { transform: translate(-170%, -50%) scale(0.85); }
+.work .project-card:nth-child(3) { transform: translate(70%, -50%) scale(0.85); }
+.work .project-card.active { transform: translate(-50%, -50%) scale(1.1); z-index: 2; }
+
+.work-detail {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(7rem, 20%) minmax(0, 1fr) minmax(7rem, 22%);
+    gap: clamp(1rem, 3vw, 2.5rem);
+    margin: clamp(1.5rem, 4vw, 3rem) var(--gutter) 0;
+    padding: clamp(1.25rem, 3vw, 3rem);
+    background: var(--green);
+    border-radius: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem) 0 0;
+}
+.work-detail-logo {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: #d9d9d9;
+}
+.work-detail-text h3 { font-size: 1.1rem; font-weight: 400; }
+.work-detail-role { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.work-detail-text ul { margin: 0; padding-left: 1.1rem; }
+.work-detail-text li { font-size: 0.95rem; margin-bottom: 0.4rem; }
+.work-detail-tools {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(2.75rem, 1fr));
+    gap: 0.75rem;
+    align-content: start;
+}
+.work-detail-tools li { aspect-ratio: 1; background: #d9d9d9; }
+ 
+/* ================= Mobile ================= */
+@media (max-width: 768px) {
+    .resume-hero {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "title"
+            "about"
+            "skills";
+        row-gap: clamp(2.5rem, 8vw, 4rem);
+    }
+    .about-photo { width: 100%; }
+    .about-blob { margin-top: -18%; }
+    .skills { padding: 0 var(--gutter); }
+ 
+    .work-detail {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .work-detail-logo { width: min(50%, 12rem); }
+    .work-detail-tools { grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr)); }
+}
