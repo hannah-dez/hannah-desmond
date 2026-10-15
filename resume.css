@@ -6,8 +6,8 @@ body:has(.resume-page) { margin: 0; }
     overflow-x: clip;
     --gutter: clamp(1rem, 4vw, 3rem);
     --green: #e9eed2;
-    --pill-font: Georgia, "Times New Roman", serif;
-    --work-overlap: 140px;
+--hero-pad-bottom: clamp(3rem, 7vw, 6rem);
+--work-overlap: calc(var(--hero-pad-bottom) + 1.5rem);
 }
 
 .pill {
@@ -28,7 +28,7 @@ body:has(.resume-page) { margin: 0; }
         "about skills";
     column-gap: clamp(1.5rem, 5vw, 5rem);
     align-items: start;
-    padding-bottom: clamp(3rem, 7vw, 6rem);
+    padding-bottom: var(--hero-pad-bottom);
 }
 
 .resume-title {
@@ -36,24 +36,24 @@ body:has(.resume-page) { margin: 0; }
     text-align: center;
     padding: clamp(1rem, 3vw, 2.5rem) 0;
 }
-.resume-title h1 { margin: 0; font-family: var(--pill-font); font-weight: 400; }
+.resume-title h1 { margin: 0; }
 .resume-title a { color: var(--black); text-decoration: none; }
 
 .about {
+
     grid-area: about;
     position: relative;
     isolation: isolate;
+    min-width: 0;
 }
 
 .about-bg {
     position: absolute;
-    z-index: 1;
-    scale: 0.86;
-    transform: scaleY(0.8);
-    top: 33%;
-    left: -8%;
-    width: 110%;
-    height: 85%;
+    z-index: -1;
+    top: calc(var(--bleed-top) * -1);
+    left: calc(var(--bleed-left) * -1);
+    width: calc(100% + var(--bleed-left) + var(--bleed-right));
+    height: calc(100% + var(--bleed-top) + var(--bleed-bottom));
     object-fit: fill;
     pointer-events: none;
 }
@@ -62,7 +62,7 @@ body:has(.resume-page) { margin: 0; }
     position: relative;
     z-index: -1;
     width: 90%;
-    aspect-ratio: 1.5 / 1;
+    aspect-ratio: 1.75 / 1;
     overflow: hidden;
     background: #cfcfcf;
     border-radius: 50% 50% 0 0 / 75% 75% 0 0;
@@ -81,18 +81,23 @@ body:has(.resume-page) { margin: 0; }
     z-index: 2;
     margin-top: -15%;
     padding: clamp(3rem, 6vw, 4.5rem)
-             clamp(1.5rem, 5vw, 4rem)
-             clamp(2rem, 5vw, 4rem)
-             var(--gutter);
+            clamp(1.5rem, 5vw, 4rem)
+            clamp(2rem, 5vw, 4rem)
+            var(--gutter);
     background: transparent;
     border-radius: 0;
+
+    isolation: isolate;
+    --bleed-top: 0px;
+    --bleed-right: 2%;
+    --bleed-bottom: 0px;
+    --bleed-left: 8%;
 }
 
 .about-blob .pill {
     position: absolute;
     top: 0;
     left: var(--gutter);
-    transform: translateY(-50%);
     z-index: 3;
 }
 
@@ -109,19 +114,29 @@ body:has(.resume-page) { margin: 0; }
     grid-area: skills;
     padding: 0.2rem var(--gutter) 0 0;
     text-align: center;
+    container-type: inline-size;
 }
 .skill-grid {
+    --cols: 6;                            
+    --gap: clamp(0.5rem, 1.6vw, 1.5rem);
+    --cell: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) - 0.1px);
+
     list-style: none;
     margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(3rem, 6vw, 4.5rem), 1fr));
-    gap: clamp(0.75rem, 1.6vw, 1.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;                   
+    gap: var(--gap);
 }
 .skill-grid li {
-    aspect-ratio: 1;
+    --span: 1;                                   
+    flex: 0 0 calc(var(--cell) * var(--span) + var(--gap) * (var(--span) - 1));
+    height: var(--cell);
     background: #f0f0f0;
 }
+
+.skill-grid img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 /* ================= SECTION 2: work ================= */
 
@@ -157,15 +172,18 @@ body:has(.resume-page) { margin: 0; }
     text-align: center;
     position: relative;
 }
-
-.work .project-wheel {
+.exp-wheel {
     position: relative;
     width: 100%;
     height: calc(var(--card-w) * 1.1);
     margin-top: clamp(1.5rem, 4vw, 3rem);
     overflow: hidden;
+    touch-action: pan-y;            /* page still scrolls up/down; sideways swipes go to the wheel */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
-.work .project-card {
+.exp-card {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -173,24 +191,27 @@ body:has(.resume-page) { margin: 0; }
     height: calc(var(--card-w) * 0.7);
     display: flex;
     flex-direction: column;
+    padding: 0;
+    border: 0;
     background: #fff;
     border-radius: 0.25rem;
     overflow: hidden;
-    text-decoration: none;
     color: var(--black);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
     box-shadow: 0 3px 8px rgb(0 0 0 / 0.3);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);   /* the script replaces this on load */
+    will-change: transform, opacity;
 }
-.work .project-card img { height: 70%; object-fit: cover; width: 100%; background: #888; }
-.work .project-card h3 { font-size: 1.25rem; padding: 0.4rem 1rem; }
-.work .project-card:nth-child(1) { transform: translate(-170%, -50%) scale(0.85); }
-.work .project-card:nth-child(3) { transform: translate(70%, -50%) scale(0.85); }
-.work .project-card.active { transform: translate(-50%, -50%) scale(1.1); z-index: 2; }
+.exp-card img { display: block; height: 70%; width: 100%; object-fit: cover; background: #888; -webkit-user-drag: none; }
+.exp-card h3 { font-size: 1.25rem; padding: 0.4rem 1rem; }
+.exp-card:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 
 .work-detail {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(7rem, 20%) minmax(0, 1fr) minmax(7rem, 22%);
+    grid-template-columns: minmax(7rem, 20%) minmax(0, 1fr) minmax(10rem, 26%);
     gap: clamp(1rem, 3vw, 2.5rem);
     margin: clamp(1.5rem, 4vw, 3rem) var(--gutter) 0;
     padding: clamp(1.25rem, 3vw, 3rem);
@@ -201,7 +222,6 @@ body:has(.resume-page) { margin: 0; }
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
-    background: #d9d9d9;
 }
 .work-detail-text h3 { font-size: 1.1rem; font-weight: 400; }
 .work-detail-role { margin: 0 0 0.5rem; font-size: 1.1rem; }
@@ -212,14 +232,20 @@ body:has(.resume-page) { margin: 0; }
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(2.75rem, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(3.75rem, 5.5vw, 4.25rem), 1fr));
+    gap: 1rem;
     align-content: start;
 }
-.work-detail-tools li { aspect-ratio: 1; background: #d9d9d9; }
- 
+.work-detail-tools li { aspect-ratio: 1; background: none; }
+.work-detail-tools img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.work-detail > * { transition: opacity 0.15s ease; }
+.work-detail.is-changing > * { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .work-detail > * { transition: none; } }
+
 /* ================= Mobile ================= */
 @media (max-width: 768px) {
+    .resume-page { --work-overlap: 0px; }
     .resume-hero {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
@@ -231,10 +257,11 @@ body:has(.resume-page) { margin: 0; }
     .about-photo { width: 100%; }
     .about-blob { margin-top: -18%; }
     .skills { padding: 0 var(--gutter); }
- 
+
     .work-detail {
         grid-template-columns: minmax(0, 1fr);
+        width: 80vw
     }
-    .work-detail-logo { width: min(50%, 12rem); }
-    .work-detail-tools { grid-template-columns: repeat(auto-fill, minmax(2.5rem, 1fr)); }
+    .work-detail-logo { width: min(50%, 12rem); justify-self: center; }
+    .work-detail-tools { grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); }
 }
