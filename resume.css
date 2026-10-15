@@ -120,7 +120,7 @@ body:has(.resume-page) { margin: 0; }
 }
 .skill-grid li {
     aspect-ratio: 1;
-    background: #d9d9d9;
+    background: #f0f0f0;
 }
 
 /* ================= SECTION 2: work ================= */
