@@ -1,9 +1,14 @@
 :root {
 --black: #000000;
+--pink: #D1A3B6;
+--serif-text: 'Literata', "./content/fonts/Literata-Regular.ttf", serif;
+--sans-serif-text: 'Fustat', "./content/fonts/Fustat-Regular.ttf", sans-serif;
 }
 
 body{
-    background-color: #f0f0f0;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #FFFDF8 100%);
+    min-height: 100vh;
+    margin: 0;
 }
 main{
     display: flex;
@@ -11,26 +16,36 @@ main{
     align-items: center;
 }
 h1{
+    color: var(--black);
+    font:var(--serif-text);
     font-size: 3em;
     font-style: bold;
-    color: var(--black);
 }
 
 h2{
-    font-size: 2.25em;
     color: var(--black);
     margin: 0px;
+    font: var(--serif-text);
+    font-size: 2.25em;
 }
 
 h3{
+    margin: 0px;
+    font:var(--serif-text);
     font-size: 1.5em;
     color: var(--black);
-    margin: 0px;
 }
 
 p{
+    font: var(--sans-serif-text);
     font-size: 1em;
     color: var(--black);
+}
+
+a{
+    font: var(--sans-serif-text);
+    font-size: 1.1em;
+    color: var(--black); 
 }
 
 .horizontal-box{
@@ -48,7 +63,18 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+
+    position: relative;      
+    z-index: 100;    
+    margin-top: 10px;   
 }
+.site-logo{
+    width: 15vw;
+    max-width: 70px;
+    height: auto;
+    object-fit: contain;
+}
+.menu-toggle { display: none; }
 
 .title-section img{
     vertical-align: center;
@@ -60,18 +86,15 @@ menu{
     justify-content: flex-end;
 }
 menu a{
-    text-decoration: none;
+    font: var(--sans-serif-text);
+    font-size: 1em;
     color: var(--black);
+    text-decoration: none;
     margin-left: 20px;
     align-items: flex-start;
     margin-top: 0px;
 }
-/*Ux Projects Styles*/
 
-/*Ux Projects Styles*/
-
-/* Card size comes from one variable, so card height and wheel size can scale with it.
-   Defaults match your original 20rem x 13rem cards. */
 .project-wheel {
     --card-w: 20rem;
 
@@ -80,9 +103,6 @@ menu a{
     height: 60vh;
     overflow: hidden;
 
-    
-    /* Cards fade out and back in when you switch folder tabs.
-       Keep the 0.2s in sync with SWITCH_FADE in script.js. */
     transition: opacity 0.2s ease;
 }
 
@@ -145,78 +165,65 @@ menu a{
     text-align: center;
 }
 
-/* main centers its children (align-items: center), which would shrink this row
-   to the width of its content, so it needs an explicit full width */
 .projects-layout {
     width: 100%;
 }
-/* ---------- Folder: the details panel with Experience / Projects tabs ----------
-   Two "sheets" are stacked. The active one is in front and its tab blends into
-   the folder. The other sits behind with just its tab showing; hover that tab
-   and the sheet slides out a little. Click it and the sheets swap. */
+/* ---------- Folder: the details panel with Experience / Projects tabs ---------- */
 .folder {
     --tab-h: 2.75rem;
     --folder-radius: 0.75rem;
     --folder-front: #d9d9d9;
     --folder-back: #c8c7c7;
- 
-    /* How far the back sheet slides out on hover */
+
     --peek-x: 0.75rem;
     --peek-y: -0.9rem;
     --peek-rotate: 2.5deg;
- 
     position: relative;
 }
- 
+
 .folder-sheet {
     position: absolute;
     inset: 0;
     z-index: 1;
- 
-    /* Experience slides left, Projects slides right */
     --dir: -1;
- 
     transform-origin: bottom center;
     transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
- 
-    /* Only the tab buttons take the mouse, so the sheets never block anything */
+
     pointer-events: none;
 }
- 
+
 .folder-sheet[data-tab="projects"] {
     --dir: 1;
 }
- 
+
 .folder-sheet.is-active {
     z-index: 2;
 }
- 
+
 /* The sheet's body (everything under the tab) */
 .folder-sheet::after {
     content: "";
     position: absolute;
     inset: var(--tab-h) 0 0 0;
     background-color: var(--folder-back);
-    /* The corner under the tab stays square so tab and body join up */
     border-radius: 0 var(--folder-radius) var(--folder-radius) var(--folder-radius);
     transition: background-color 0.35s ease;
 }
- 
+
 .folder-sheet[data-tab="projects"]::after {
     border-radius: var(--folder-radius) 0 var(--folder-radius) var(--folder-radius);
 }
- 
+
 .folder-sheet.is-active::after {
     background-color: var(--folder-front);
 }
- 
+
 .folder-tab {
     position: absolute;
     top: 0;
-    width: 50%;
-    /* +1px overlaps the body so there's no hairline between tab and body */
+    width: 50%;   
     height: calc(var(--tab-h) + 1px);
- 
+
     border: 0;
     border-radius: var(--folder-radius) var(--folder-radius) 0 0;
     background-color: var(--folder-back);
@@ -225,59 +232,53 @@ menu a{
     font-size: 1.25rem;
     cursor: pointer;
     pointer-events: auto;
- 
     transition: background-color 0.35s ease;
 }
- 
+
 .folder-sheet[data-tab="experience"] .folder-tab {
     left: 0;
 }
- 
+
 .folder-sheet[data-tab="projects"] .folder-tab {
     right: 0;
 }
- 
+
 .folder-sheet.is-active .folder-tab {
     background-color: var(--folder-front);
     cursor: default;
 }
- 
-/* The inactive tab moves when hovered, so give it a larger invisible hit area.
-   Otherwise the tab slides out from under the mouse and flickers. */
+
 .folder-sheet:not(.is-active) .folder-tab::after {
     content: "";
     position: absolute;
     inset: -1.25rem;
 }
- 
+
 /* Hover (or keyboard focus) on the tab behind: the sheet slides out */
 .folder-sheet:not(.is-active):has(.folder-tab:is(:hover, :focus-visible)) {
     transform:
         translate(calc(var(--dir) * var(--peek-x)), var(--peek-y))
         rotate(calc(var(--dir) * var(--peek-rotate)));
 }
- 
+
 .folder-tab:focus-visible {
     outline: 2px solid var(--black, #000000);
     outline-offset: -4px;
 }
- 
-/* The picture, title and description sit on top of the front sheet.
-   The top margin keeps the content clear of the tabs. */
+
 .folder-content {
     position: relative;
     z-index: 3;
     margin-top: var(--tab-h);
     padding: 1.5rem;
- 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
- 
+
     text-align: left;
 }
- 
+
 .folder-content img {
     width: 100%;
     max-height: 45vh;
@@ -285,12 +286,12 @@ menu a{
     object-fit: cover;
     border-radius: 0.5rem;
 }
- 
+
 .folder-content h3,
 .folder-content p {
     margin: 0;
 }
- 
+
 @media (prefers-reduced-motion: reduce) {
     .folder-sheet,
     .folder-sheet::after,
@@ -299,13 +300,10 @@ menu a{
         transition: none;
     }
 }
- 
+
 /* ---------- Desktop, right-focus layout: <div class="project-wheel" data-focus="right"> ---------- */
 @media (min-width: 769px) {
 
-    /* Page becomes a column that is at least one screen tall:
-       header and title take their natural height, the wheel gets everything left.
-       (Only applies to pages that contain a right-focus wheel.) */
     body:has(.project-wheel[data-focus="right"]) {
         margin: 0;
         min-height: 100vh;
@@ -321,8 +319,6 @@ menu a{
         flex-direction: column;
     }
 
-    /* Wheel and details panel sit side by side in one row,
-       and that row takes all the height left under the title */
     .projects-layout {
         --details-w: clamp(18rem, 30vw, 28rem);
 
@@ -352,47 +348,117 @@ menu a{
         min-width: 0;
         margin: 1.25rem clamp(1.5rem, 4vw, 4rem) 0 0;
     }
- 
+
     .project-wheel[data-focus="right"] .project-card {
         /* The JS places each card's top-left corner, starting from here */
         left: 0;
         top: 0;
     }
 }
- 
+
 /* ---------- Mobile: horizontal 3D circle ---------- */
 @media (max-width: 768px) {
- 
+
     /* Wheel on top, folder underneath. The card already shows the picture
        on mobile, so the folder skips it (delete this rule to show it). */
     .projects-layout .project-details {
         margin: 1.25rem 1.5rem 2rem;
     }
- 
+
     .folder-content img {
         display: none;
     }
- 
+
     .project-wheel {
         /* Cards, and the wheel around them, scale with the screen width */
         --card-w: min(80vw, 24rem);
         height: calc(var(--card-w) * 1.1);
- 
+
         /* Let the page scroll up/down, but give horizontal swipes to the JS.
            (The JS sets the perspective, so depth also scales with card size.) */
         touch-action: pan-y;
     }
- 
+
     .project-card {
-        /* Centered in the wheel; the JS adds the 3D movement on top.
-           No CSS transition here, the JS animates every frame. */
         left: 50%;
         top: 50%;
- 
         margin: 0;
- 
         transform-origin: center center;
         will-change: transform, opacity;
     }
- 
+
+}
+
+@media (max-width: 650px) {
+    .menu-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        border-radius: 0.5rem;
+        background: transparent;
+        cursor: pointer;
+    }
+    .menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--black);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .menu-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+    .menu-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .menu-toggle:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+
+    header menu.horizontal-box {
+        position: absolute;
+        top: calc(100% - 4px);
+        right: 20px;
+        flex-direction: column;
+        min-width: 10rem;
+        margin: 0;
+        padding: 0.5rem;
+        background: #fff;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);      /* same shadow as the pills */
+
+        opacity: 0;
+        visibility: hidden;                           /* hidden links also leave the tab order */
+        transform: translateY(-6px);
+        transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+    }
+    .menu-open menu.horizontal-box { opacity: 1; visibility: visible; transform: none; }
+
+    header menu.horizontal-box a {
+        display: block;
+        margin: 0;                                    /* undoes the 20px left margin from wide screens */
+        padding: 0.6rem 1rem;
+        border-radius: 0.5rem;
+    }
+    header menu.horizontal-box a:hover,
+    header menu.horizontal-box a:focus-visible { background: #f0f0f0; }
+
+    h1{
+        font-size: 2em;
+    }
+
+    h2{
+        font-size: 1.25em;
+    }
+    h3{
+        font-size: 1.10em;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-toggle span,
+    header menu.horizontal-box { transition: none; }
 }

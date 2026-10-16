@@ -4,8 +4,8 @@ const experiences = [
         location: "Philadelphia, Pennsylvania",         
         role: "Multimedia Designer",                         
         dates: "Apr 2023-Sep 2024",                  
-        cardImage: "content/defaultimg.jpg",            
-        image: "content/defaultimg.jpg",      
+        cardImage: "content/Septa-Logo.png",            
+        image: "content/Septa_Resume_Pic.jpeg",      
         bullets: [
             "Designed and developed five e-learning modules and two proof-of-concept projects, while contributing to 10+ additional initiatives.",
             "Created animations, interface layouts, quiz interactions, iconography, and 250+ UI buttons, including 15 custom designs.",
@@ -24,8 +24,8 @@ const experiences = [
         location: "Cinaminson, New Jersey",
         role: "UX Design Intern",
         dates: "Mar 2026-Sep 2026",
-        cardImage: "content/defaultimg.jpg",
-        image: "content/defaultimg.jpg",
+        cardImage: "content/Opex-Logo.png",
+        image: "content/OPEX_Resume_Pic.jpeg",
         bullets: [
             "Served as the sole UX designer embedded within the Infinity HMI development team, leading end-to-end research, interaction design, prototyping, and validation.",
             "Conducted and synthesized 25+ user interviews, usability tests, and validation sessions, translating findings into design improvements, functional requirements, and developer documentation.",
@@ -45,13 +45,13 @@ const experiences = [
         location: "Dublin, Ireland",               
         role: "Design Team Intern",                  
         dates: "Apr 2025-Aug 2025",           
-        cardImage: "content/defaultimg.jpg",
-        image: "content/defaultimg.jpg",
+        cardImage: "content/Teneo-Logo.png",
+        image: "content/TENEO_Resume_Pic.jpg",
         bullets: [
             "Supported UX research and led three user-testing sessions, gathering and organizing feedback to identify usability issues and inform design decisions.",
             "Developed professional wireframes and low-fidelity prototypes to explore page structure, navigation, and key user flows alongside the UX team.",
             "Conducted UX audits across websites and digital content feeds, evaluating usability, visual consistency, information hierarchy, and opportunities for improvement.",
-            "Researched competitors’ Instagram and LinkedIn strategies, comparing visual identity, content patterns, and platform engagement to identify relevant design trends."
+            "Researched competitors' Instagram and LinkedIn strategies, comparing visual identity, content patterns, and platform engagement to identify relevant design trends."
         ],
         skills: [
             { name: "Figma", src: "content/logo-figma.png" }

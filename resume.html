@@ -10,13 +10,16 @@
 <body>
     <header class="horizontal-box">
         <div class="title-section horizontal-box">
-            <img alt="logo">
+            <img src="content/site-logo.png" alt="logo" class="site-logo">
             <div class="vertical-box">
                 <h2>Hannah Desmond</h2>
                 <h3>UX Fullstack Designer</h3>
             </div>
         </div>
-        <menu class="horizontal-box">
+        <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-menu">
+            <span></span><span></span><span></span>
+        </button>
+        <menu id="site-menu" class="horizontal-box">
             <a href="uxprojects.html">Projects</a>
             <a href="resume.html">Resume</a>
             <a href="contact.html">Contact</a>
@@ -33,14 +36,14 @@
                     <img src="content/about-photo.png" alt="Hannah on a beach at sunset">
                 </div>
                 <div class="about-blob">
-                    <img class="about-bg" src="content/about-blob.png" alt="" aria-hidden="true">
-                    <h2 class="pill">About Me</h2>
+                    <img class="about-bg" src="content/about-blob.png" alt="" aria-hidden="true"> <!--Make this a div and figure our background height for better text fit-->
+                    <h3 class="pill">About Me</h3>
                     <p>I'm a UX designer, collaborative team player, and persistent problem-solver who adapts quickly when challenges or priorities change. I approach my work with curiosity, optimism, and a sense of humor, always looking for opportunities to learn, contribute, and help the people around me.</p>
                     <p>My goal is to work closely with developers on evolving products, turning complex problems into thoughtful, practical experiences. I'm especially motivated by teams with clear goals, open communication, and a shared desire to create work that makes a meaningful difference for the people who use it.</p>
                 </div>
             </div>
             <div class="skills">
-                <h2 class="pill">Skills</h2>
+                <h3 class="pill">Skills</h3>
                 <ul class="skill-grid">
                     <li><img src="content/logo-audition.png" alt="Adobe Audition Logo"></li>
                     <li><img src="content/logo-br.png" alt="Adobe Bridge Logo"></li>
@@ -65,7 +68,7 @@
         </section>
         <section class="work">
             <div class="work-bg" aria-hidden="true"></div>
-            <h2 class="pill work-title">Work Experiences</h2>
+            <h3 class="pill work-title">Work Experiences</h3>
             <!-- The script builds the three cards in here -->
             <div class="exp-wheel" role="group" aria-roledescription="carousel" aria-label="Work experiences"></div>
             <article class="work-detail" aria-live="polite">
@@ -83,8 +86,8 @@
                 <ul class="work-detail-tools" data-exp="skills"></ul>
             </article>
         </section>
- 
     </main>
     <script src="experience.js"></script>
+    <script src="menu.js"></script>
 </body>
 </html>

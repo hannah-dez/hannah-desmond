@@ -56,6 +56,9 @@ body:has(.resume-page) { margin: 0; }
     height: calc(100% + var(--bleed-top) + var(--bleed-bottom));
     object-fit: fill;
     pointer-events: none;
+    /*background-image: url("content/about-blob.png");
+    background-size: cover;
+        background-repeat: no-repeat;*/
 }
 
 .about-photo {
@@ -80,10 +83,7 @@ body:has(.resume-page) { margin: 0; }
     position: relative;
     z-index: 2;
     margin-top: -15%;
-    padding: clamp(3rem, 6vw, 4.5rem)
-            clamp(1.5rem, 5vw, 4rem)
-            clamp(2rem, 5vw, 4rem)
-            var(--gutter);
+    padding: 0 12% 24% var(--gutter);   
     background: transparent;
     border-radius: 0;
 
@@ -99,11 +99,13 @@ body:has(.resume-page) { margin: 0; }
     top: 0;
     left: var(--gutter);
     z-index: 3;
+    margin: 0 0 calc(1rem + 3%);
 }
 
 .about-blob p {
     margin: 0 0 1em;
     font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+    transform: translateY(75px);
 }
 
 .about-blob p:last-child {
@@ -133,7 +135,6 @@ body:has(.resume-page) { margin: 0; }
     --span: 1;                                   
     flex: 0 0 calc(var(--cell) * var(--span) + var(--gap) * (var(--span) - 1));
     height: var(--cell);
-    background: #f0f0f0;
 }
 
 .skill-grid img { display: block; width: 100%; height: 100%; object-fit: contain; }
@@ -144,11 +145,11 @@ body:has(.resume-page) { margin: 0; }
     position: relative;
     isolation: isolate;
     margin-top: calc(var(--work-overlap) * -1);
-    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding-top: clamp(0.25rem, 1vw, 0.75rem); 
 
     --notch-w: clamp(9rem, 26vw, 24rem);
     --notch-h: clamp(2.5rem, 6vw, 5.5rem);
-    --card-w: clamp(11rem, 24vw, 17rem);
+    --card-w: clamp(12rem, 30vw, 22rem);
 }
 
 .work-bg {
@@ -175,8 +176,8 @@ body:has(.resume-page) { margin: 0; }
 .exp-wheel {
     position: relative;
     width: 100%;
-    height: calc(var(--card-w) * 1.1);
-    margin-top: clamp(1.5rem, 4vw, 3rem);
+    height: calc(var(--card-w) * 0.9);           /* was 1.1: just tall enough for the ring */
+    margin-top: 0; 
     overflow: hidden;
     touch-action: pan-y;            /* page still scrolls up/down; sideways swipes go to the wheel */
     user-select: none;
@@ -193,7 +194,7 @@ body:has(.resume-page) { margin: 0; }
     flex-direction: column;
     padding: 0;
     border: 0;
-    background: #fff;
+    background: var(--green); /*make multi colored later on based on logo*/
     border-radius: 0.25rem;
     overflow: hidden;
     color: var(--black);
@@ -222,6 +223,7 @@ body:has(.resume-page) { margin: 0; }
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
+    border-radius: 0.5rem;
 }
 .work-detail-text h3 { font-size: 1.1rem; font-weight: 400; }
 .work-detail-role { margin: 0 0 0.5rem; font-size: 1.1rem; }
@@ -237,7 +239,7 @@ body:has(.resume-page) { margin: 0; }
     align-content: start;
 }
 .work-detail-tools li { aspect-ratio: 1; background: none; }
-.work-detail-tools img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.work-detail-tools img { display: block; width: 100%; height: 100%; object-fit: contain;}
 
 .work-detail > * { transition: opacity 0.15s ease; }
 .work-detail.is-changing > * { opacity: 0; }
@@ -256,7 +258,9 @@ body:has(.resume-page) { margin: 0; }
     }
     .about-photo { width: 100%; }
     .about-blob { margin-top: -18%; }
-    .skills { padding: 0 var(--gutter); }
+    .skills { padding: 0 var(--gutter);
+    width: 80%; 
+margin: 0 auto; }
 
     .work-detail {
         grid-template-columns: minmax(0, 1fr);
@@ -264,4 +268,18 @@ body:has(.resume-page) { margin: 0; }
     }
     .work-detail-logo { width: min(50%, 12rem); justify-self: center; }
     .work-detail-tools { grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr)); }
+}
+
+/*@media (max-width: 780px){
+    .about-bg{
+        background-image: url("content/about-blob-small-screen.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}*/
+
+@media (max-width: 650px){
+    .about-photo{
+        width: 80%;
+    }
 }
