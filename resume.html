@@ -5,90 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="resume.css">
-    <link rel="icon" type="image/png" href="content/site-logo.png">
     <title>Resume</title>
 </head>
 <body>
     <header class="horizontal-box">
         <div class="title-section horizontal-box">
-            <img src="content/site-logo.png" alt="logo" class="site-logo">
+            <img alt="logo" src="content/site-logo.png" class="site-logo">
             <div class="vertical-box">
                 <h2>Hannah Desmond</h2>
                 <h3>UX Fullstack Designer</h3>
             </div>
         </div>
-        <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-menu">
-            <span></span><span></span><span></span>
-        </button>
-        <menu id="site-menu" class="horizontal-box">
+        <menu class="horizontal-box">
             <a href="uxprojects.html">Projects</a>
             <a href="resume.html">Resume</a>
             <a href="contact.html">Contact</a>
         </menu>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </header>
     <main class="resume-page">
-        <section class="resume-hero">
-            <div class="resume-title">
-                <h1>Resume</h1>
-                <a href="content/Resume_2026.pdf" download target="_blank">Download</a>
-            </div>
-            <div class="about">
-                <div class="about-photo">
-                    <img src="content/about-photo.png" alt="Hannah on a beach at sunset">
-                </div>
-                <div class="about-blob">
-                    <img class="about-bg" src="content/about-blob.png" alt="" aria-hidden="true"> <!--Make this a div and figure our background height for better text fit-->
-                    <h3 class="pill">About Me</h3>
-                    <p>I'm a UX designer, collaborative team player, and persistent problem-solver who adapts quickly when challenges or priorities change. I approach my work with curiosity, optimism, and a sense of humor, always looking for opportunities to learn, contribute, and help the people around me.</p>
-                    <p>My goal is to work closely with developers on evolving products, turning complex problems into thoughtful, practical experiences. I'm especially motivated by teams with clear goals, open communication, and a shared desire to create work that makes a meaningful difference for the people who use it.</p>
-                </div>
-            </div>
-            <div class="skills">
-                <h3 class="pill">Skills</h3>
-                <ul class="skill-grid">
-                    <li><img src="content/logo-audition.png" alt="Adobe Audition Logo"></li>
-                    <li><img src="content/logo-br.png" alt="Adobe Bridge Logo"></li>
-                    <li><img src="content/logo-aftereffects.png" alt="Adobe After Effects Logo"></li>
-                    <li><img src="content/logo-photoshop.png" alt="Adobe Photoshop Logo"></li>
-                    <li><img src="content/logo-illustrator.png" alt="Adobe Illustrator Logo"></li>
-                    <li><img src="content/logo-primiere.png" alt="Adobe Premiere Logo"></li>
-                    <li><img src="content/logo-js.png" alt="JavaScript Logo"></li>
-                    <li><img src="content/logo-html.png" alt="HTML Logo"></li>
-                    <li><img src="content/logo-css.png" alt="CSS Logo"></li>
-                    <li><img src="content/logo-c.png" alt="C++ Logo"></li>
-                    <li><img src="content/logo-php.png" alt="PHP Logo"></li>
-                    <li><img src="content/logo-UE5.png" alt="Unreal Engine 5 Logo"></li>
-                    <li><img src="content/logo-figma.png" alt="Figma Logo"></li>
-                    <li><img src="content/logo-git.png" alt="Github Logo"></li>
-                    <li><img src="content/logo-wordpress.png" alt="Wordpress Logo"></li>
-                    <li><img src="content/logo-confluence.png" alt="Confluence Logo"></li>
-                    <li><img src="content/logo-rs.png" alt="React Logo"></li>
-                    <li><img src="content/logo-sl.png" alt="Storyline Logo"></li>
+    <h2 id="resume-text">Resume</h2>
+    <div class="horizontal-box" id="profile-box">
+        <div class="left-text">
+            <h3>Profile</h3>
+            <p class="itallics">HANNAH DESMOND (she/her)<br>hdesmond913@gmail.com | (818) 618-7456<br>3417 Race Street, Philadelphia, PA 19104</p>
+            <p id="graduation" class="bold">Drexel University | Graduation June 2027</p>
+            <p id="profile-abt">UX designer with hands-on experience bridging user-centered design and software engineering for complex, real-world systems. Experienced in user research, interaction design, prototyping, and usability validation, with technical skills spanning Figma, Unreal Engine, UMG, and foundational C++. Interested in collaborating closely with engineering teams to build intuitive, reliable products.</p>
+            <button><a href="https://hannah-online.netlify.app/" target="_blank">Portfolio Site</a></button>
+        </div>
+        <img src="content/resume/AboutPhoto.png" alt="Hannah Sitting on the beach at sunset" class="about-photo">
+    </div>
+    <h3>Skills</h3>
+    <div class="horizontal-box" id="skills">
+        <div class="icon-collumn vertical-box">
+            <img src="content/resume/logo-js.png" alt="Java Script Logo">
+            <img src="content/resume/logo-css.png" alt="CSS Logo">
+            <img src="content/resume/logo-html.png" alt="HTML Logo">
+            <img src="content/resume/logo-c.png" alt="C++ Logo">
+            <img src="content/resume/logo-php.png" alt="PHP Logo">
+            <img src="content/resume/logo-UE5.png" alt="Unreal Engine Logo">
+        </div>
+        <div class="skills-list">
+            <h4>Software:</h4>
+            <ul>
+                <li>Microsoft Office, Google Drive</li>
+                <li>Adobe Photoshop, Illustrator, Bridge, After Affects, Audition, and Premiere Pro</li>
+                <li>Figma, WordPress</li>
+                <li>GitHub and VS Code</li>
+                <li>HTML, CSS, JS, PHP, and beginner C++</li>
+                <li>Articulate Story Line and Rise 360</li>
+                <li>Jira, Plastic, Confluence</li>
+                <li>Unreal Engine 5, UMG</li>
+            </ul>
+        </div>
+        <div class="icon-collumn vertical-box">
+            <img src="content/resume/logo-figma.png" alt="Figma Logo">
+            <img src="content/resume/logo-wordpress.png" alt="Wordpress Logo">
+            <img src="content/resume/logo-confluence.png" alt="Confluence Logo">
+            <img src="content/resume/logo-git.png" alt="Github Logo">
+            <img src="content/resume/logo-sl.png" alt="Storyline Logo">
+            <img src="content/resume/logo-rs.png" alt="React Story Line Logo">
+        </div>
+        <div class="skills-list">
+            <h4>UI/UX Design Skills:</h4>
+            <ul>
+                <li>Interaction Design</li>
+                <li>Prototyping</li>
+                <li>Workflow Design + Reusable UI Components</li>
+                <li>Wire Frames + Task Flow Design</li>
+                <li>Usability Testing</li>
+                <li>Design Theories and Principles</li>
+                <li>User Research</li>
+                <li>Project Management</li>
+            </ul>
+        </div>
+    </div>
+    <div class="experience">
+        <h3>Experience</h3>
+        <div class="horizontal-box">
+            <img src="content/resume/OPEX_Resume_Pic.png" alt="Hannah standing with other OPEX CO-OPs in front of an office building." class="experience-img">
+            <div id="opex" class="job-description">
+                <img src="content/resume/Opex-Header.png" alt="A small organic shape and the Opex Logo" class="coop-logo"> 
+                <p class="bold">OPEX | Cinnaminson, New Jersey</p>
+                <p class="itallics">Warehouse Automation Design Intern, March - September 2026</p>
+                <p class="accent-text">Supervisor: Rob Gougher | rgougher@opex.com</p>
+                <ul>
+                    <li>Sole UX designer on an HMI development team, leading research, interaction design, prototyping, and validation for the Infinity virtual warehouse system.</li>
+                    <li>Conducted 25+ user interviews, usability tests, and validation sessions, translating findings into design iterations, functional requirements, and development documentation.</li>
+                    <li>Self-taught Unreal Engine 5, UMG, Blueprint, and foundational C++ to build functional prototypes and reusable components bridging Figma designs and implementation.</li>
+                    <li>Led UX for two major workflows, designing complex navigation, version comparison, timeline controls, and recording export through iterative testing.</li>
+                    <li>Established an accessible HMI color system, centralized Figma design library, and reusable UI components to improve consistency and dev efficiency.</li>
                 </ul>
             </div>
-        </section>
-        <section class="work">
-            <div class="work-bg" aria-hidden="true"></div>
-            <h3 class="pill work-title">Work Experiences</h3>
-            <!-- The script builds the three cards in here -->
-            <div class="exp-wheel" role="group" aria-roledescription="carousel" aria-label="Work experiences"></div>
-            <article class="work-detail" aria-live="polite">
-                <img class="work-detail-logo" data-exp="image" src="content/defaultimg.jpg" alt="">
-                <div class="work-detail-text">
-                    <h3 data-exp="heading">OPEX | Cinaminson, New Jersey</h3>
-                    <p class="work-detail-role" data-exp="role">UX Design Intern | Mar 2026-Sep 2026</p>
-                    <ul data-exp="bullets">
-                        <li>Served as the sole UX designer embedded within the Infinity HMI development team, leading end-to-end research, interaction design, prototyping, and validation.</li>
-                        <li>Conducted and synthesized 25+ user interviews, usability tests, and validation sessions, translating findings into design improvements, functional requirements, and developer documentation.</li>
-                        <li>Bridged design and development by learning Unreal Engine 5, UMG, Blueprint, and foundational C++ to build functional prototypes and reusable widgets for testing before Slate implementation.</li>
-                        <li>Designed and tested complex tools, including the WAC Configurator and Instant Replay, while establishing an accessible color system, centralized Figma library, and reusable components across the HMI.</li>
-                    </ul>
-                </div>
-                <ul class="work-detail-tools" data-exp="skills"></ul>
-            </article>
-        </section>
+        </div>
+        <div class="horizontal-box">
+            <img src="content/resume/TENEO_Resume_Pic.png" alt="Hannah standing with two freinds infront of the Cliffs of Moher." class="experience-img">
+            <div id="teneo" class="job-description">
+                <img src="content/resume/Teneo-Header.png" alt="A small organic shape and the Teneo Logo." class="coop-logo">
+                <p class="bold">Teneo | Dublin, Ireland</p>
+                <p class="itallics">Design Team Intern, April 2025 - August 2025</p>
+                <p class="accent-text">Supervisor: Karolina Badzmeirowska | karolina.badzmierowska@teneo.com</p>
+                <ul>
+                    <li>Assisted UX team with research and led three user testing sessions. Built out professional wireframes and low fidelity prototypes.</li>
+                    <li>Conducted UX audits on numerous sites and feeds.</li>
+                    <li>Conducted competitor social media research on Instagram and LinkedIn.</li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="horizontal-box">
+            <img src="content/resume/Septa_Resume_Pic.png" alt="Hannah with two co workers in a Trolley yard with Septa trolleys in the background." class="experience-img">
+            <div id="septa" class="job-description">
+                <img src="content/resume/Septa-Header.png" alt="A small organic shape and the Septa Logo." class="coop-logo">
+                <p class="bold">SEPTA | Philadelphia, PA</p>
+                <p class="itallics">Multimedia Designer, April 2024 - September 2024</p>
+                <p class="accent-text">Supervisor: Dennis Noble | dnoble@septa.org</p>                
+                <ul>
+                    <li>Designed and built five e-learning modules and two proofs of concept, contributing to 10+ additional projects.</li>
+                    <li>Within e-learning modules, assisted with graphic animation, iconography (creating over 250 buttons, with 15 custom designs), UI flow for interactive knowledge quizzes, and assisted with page layout.</li>
+                    <li>Filmed and edited five 15-minute instructional videos, handling professional equipment, green-screen removal, B-roll, and audio cleanup.</li>
+                    <li>Developed custom video-buffer animations to enhance instructional videos and e-learning experiences.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     </main>
-    <script src="experience.js"></script>
-    <script src="menu.js"></script>
+    <footer class="resume-footer">
+        <ul class="footer-links">
+            <li><a href="content/Resume_2026.pdf" download="Resume-2026.pdf" target="_blank">Download Resume</a></li>
+            <li>|</li>
+            <li><a href="https://www.linkedin.com/in/hannah--desmond/" target="_blank">LinkdIn</a></li>
+            <li>|</li>
+            <li><a href="https://www.instagram.com/hannah_dez_/" target="_blank">Instagram</a></li>
+        </ul>
+    </footer>
+    <script>
+        (function () {
+            var header = document.querySelector('header');
+            var toggle = document.querySelector('.menu-toggle');
+            if (!header || !toggle) return;
+            function setOpen(open) {
+                header.classList.toggle('menu-open', open);
+                toggle.setAttribute('aria-expanded', open);
+            }
+            toggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                setOpen(!header.classList.contains('menu-open'));
+            });
+            header.querySelectorAll('menu a').forEach(function (a) {
+                a.addEventListener('click', function () { setOpen(false); });
+            });
+            document.addEventListener('click', function (e) {
+                if (!header.contains(e.target)) setOpen(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') setOpen(false);
+            });
+        })();
+    </script>
 </body>
 </html>

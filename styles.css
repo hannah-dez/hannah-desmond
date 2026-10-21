@@ -1,8 +1,21 @@
+@font-face {
+    font-family: 'Literata';
+    src: url('./content/fonts/Literata-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fustat';
+    src: url('./content/fonts/Fustat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
 :root {
 --black: #000000;
 --pink: #D1A3B6;
---serif-text: 'Literata', "./content/fonts/Literata-Regular.ttf", serif;
---sans-serif-text: 'Fustat', "./content/fonts/Fustat-Regular.ttf", sans-serif;
+--serif-text: 'Literata', serif;
+--sans-serif-text: 'Fustat', sans-serif;
 }
 
 body{
@@ -17,7 +30,7 @@ main{
 }
 h1{
     color: var(--black);
-    font:var(--serif-text);
+    font-family:var(--serif-text);
     font-size: 3em;
     font-style: bold;
 }
@@ -25,25 +38,25 @@ h1{
 h2{
     color: var(--black);
     margin: 0px;
-    font: var(--serif-text);
+    font-family: var(--serif-text);
     font-size: 2.25em;
 }
 
 h3{
     margin: 0px;
-    font:var(--serif-text);
+    font-family: var(--serif-text);
     font-size: 1.5em;
     color: var(--black);
 }
 
 p{
-    font: var(--sans-serif-text);
+    font-family: var(--sans-serif-text);
     font-size: 1em;
     color: var(--black);
 }
 
 a{
-    font: var(--sans-serif-text);
+    font-family: var(--sans-serif-text);
     font-size: 1.1em;
     color: var(--black); 
 }
@@ -86,7 +99,7 @@ menu{
     justify-content: flex-end;
 }
 menu a{
-    font: var(--sans-serif-text);
+    font-family: var(--sans-serif-text);
     font-size: 1em;
     color: var(--black);
     text-decoration: none;
